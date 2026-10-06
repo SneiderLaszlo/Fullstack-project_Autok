@@ -26,7 +26,18 @@
         @foreach ($car_makers as $car_maker)
             <article class="flex flex-col rounded-xl bg-white p-5 shadow-sm ring-1 ring-asphalt/10">
                 <div class="flex items-center gap-4">
-                    <div class="flex size-14 shrink-0 items-center justify-center rounded-lg bg-asphalt text-2xl font-extrabold text-white">{{ mb_strtoupper(mb_substr($car_maker->name, 0, 1)) }}</div>
+                    @php
+    $slug = \Illuminate\Support\Str::slug($car_maker->name);
+    $logo = collect(glob(public_path("images/{$slug}.*")))->first();
+@endphp
+
+@if ($logo)
+    <div class="flex size-14 shrink-0 items-center justify-center rounded-lg bg-white p-1.5 ring-1 ring-asphalt/10">
+        <img src="{{ asset('images/' . basename($logo)) }}" alt="{{ $car_maker->name }} logó" class="max-h-full max-w-full object-contain">
+    </div>
+@else
+    <div class="flex size-14 shrink-0 items-center justify-center rounded-lg bg-asphalt text-2xl font-extrabold text-white">{{ mb_strtoupper(mb_substr($car_maker->name, 0, 0)) }}</div>
+@endif
                     <div class="min-w-0">
                         <h2 class="truncate text-xl font-bold">{{ $car_maker->name }}</h2>
                         <p class="text-sm text-asphalt/60">{{ $car_maker->car_models_count }} modell</p>
@@ -46,7 +57,7 @@
                     <a href="{{ route('car_makers.edit', $car_maker->id) }}" class="link-quiet">Szerkesztés</a>
                     <form action="{{ route('car_makers.destroy', $car_maker->id) }}" method="POST" onsubmit="return confirm('Biztosan törlöd: {{ $car_maker->name }}? A hozzá tartozó modellek is törlődnek.')">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn-danger">Törlés</button>
+                        <button type="submit" class="btn-danger"><img src="{{ asset('images/trash-solid-full.svg') }}" alt="" class="size-5"></button>
                     </form>
                 </div>
             </article>

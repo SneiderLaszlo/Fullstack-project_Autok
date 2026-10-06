@@ -11,7 +11,8 @@
                 <a href="{{ route('car_models.edit', $car_model->id) }}" class="link-quiet">Szerkesztés</a>
                 <form action="{{ route('car_models.destroy', $car_model->id) }}" method="POST" onsubmit="return confirm('Biztosan törlöd: {{ $car_model->car_maker->name }} {{ $car_model->name }}?')">
                     @csrf @method('DELETE')
-                    <button type="submit" class="btn-danger">Törlés</button>
+                    <button type="submit" class="btn-danger"><button type="submit" class="btn-danger"><img src="{{ asset('images/trash-solid-full.svg') }}" alt="" class="size-5"></button>
+                   </button>
                 </form>
             </div>
         @endif
