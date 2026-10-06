@@ -1,0 +1,26 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+    --color-asphalt: #1b1f27;
+    --color-eu: #1d3f9e;
+    --color-paper: #eceef1;
+    --color-signal: #c92f25;
+}
+
+@layer base {
+    body { @apply bg-paper text-asphalt antialiased; }
+}
+
+@layer components {
+    .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-eu px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-eu/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-eu; }
+    .btn-ghost { @apply inline-flex items-center justify-center gap-2 rounded-lg border border-asphalt/15 bg-white px-4 py-2.5 text-sm font-semibold text-asphalt transition hover:bg-asphalt/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-eu; }
+    .btn-danger { @apply inline-flex items-center justify-center rounded-lg px-3 py-2 text-sm font-semibold text-signal transition hover:bg-signal/10 focus-visible:outline-2 focus-visible:outline-signal; }
+    .link-quiet { @apply rounded-lg px-3 py-2 text-sm font-semibold text-asphalt/70 transition hover:bg-asphalt/5 hover:text-asphalt; }
+    .field { @apply block w-full rounded-lg border border-asphalt/20 bg-white px-3.5 py-2.5 text-sm placeholder:text-asphalt/40 focus:border-eu focus:outline-2 focus:outline-eu/30; }
+    .label { @apply mb-1.5 block text-sm font-semibold; }
+    .err { @apply mt-1.5 text-sm text-signal; }
+}
